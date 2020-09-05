@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+    php-src:
+        build: . 
+        container_name: debug
+        # options needed for gdb debugging
+        security_opt: 
+          - seccomp:unconfined
+          - apparmor:unconfined
+        cap_add:
+          - ALL
+        ports:
+          - "80:80"
+          - "8080:8080"
+        volumes:
+          - .:/root/work
+        command:
+          bash -c "tail -f /dev/null"
